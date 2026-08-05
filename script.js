@@ -107,4 +107,18 @@ document.addEventListener("DOMContentLoaded", () => {
         updateCaption(activeIndex);
         startAutoplay();
     }
+
+    const contactForm = document.getElementById("contact-form");
+    if (contactForm) {
+        const successMessage = document.getElementById("contact-form-success");
+
+        contactForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            if (!contactForm.reportValidity()) return;
+
+            successMessage.classList.add("visible");
+            contactForm.reset();
+        });
+    }
 });
