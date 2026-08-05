@@ -1,6 +1,6 @@
 :root {
     /* Hier einfach anpassen */
-    --box-width: 1400px;
+    --box-width: 1450px;
     --box-height: 1000px;
     --border-radius: 20px;
     --blur-amount: 10px;
@@ -12,6 +12,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+@font-face {
+    font-family: 'Segoe UI';
+    src: url('fonts/SegoeUI.woff2') format('woff2');
 }
 
 .background {
@@ -110,6 +116,8 @@
     height: var(--box-height);
     border-radius: var(--border-radius);
     border: var(--border-thickness) solid var(--border-color);
+    position: relative;
+    overflow: hidden;
 
     /* Der eigentliche Blur-Effekt */
     background: rgba(255, 255, 255, 0.1);
@@ -124,4 +132,36 @@
     color: white;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     /* leichter Schatten für Tiefe */
+}
+
+.page {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    padding: 60px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+}
+
+.page.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.page h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.page p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    line-height: 1.6;
 }

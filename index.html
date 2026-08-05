@@ -11,13 +11,13 @@
 <body>
     <div class="background">
         <nav class="glass-nav">
-            <a href="#" class="nav-item" title="Home">
+            <a href="#" class="nav-item active" title="Home" data-target="home">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path d="M3 9.5 12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V9.5Z" />
                 </svg>
             </a>
-            <a href="#" class="nav-item" title="Leistungen">
+            <a href="#" class="nav-item" title="Leistungen" data-target="leistungen">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <rect x="3" y="8" width="18" height="12" rx="2" />
@@ -25,20 +25,20 @@
                     <path d="M3 13h18" />
                 </svg>
             </a>
-            <a href="#" class="nav-item" title="Projekte">
+            <a href="#" class="nav-item" title="Projekte" data-target="projekte">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" />
                 </svg>
             </a>
-            <a href="#" class="nav-item" title="Über uns">
+            <a href="#" class="nav-item" title="Über uns" data-target="ueberuns">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <circle cx="12" cy="8" r="4" />
                     <path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1" />
                 </svg>
             </a>
-            <a href="#" class="nav-item" title="Kontakt">
+            <a href="#" class="nav-item" title="Kontakt" data-target="kontakt">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
@@ -48,7 +48,30 @@
         </nav>
 
         <div class="glass-box">
-            <h1></h1>
+            <div class="page active" id="home">
+                <h1>Willkommen bei Niceland</h1>
+                <p>Hier steht dein Einleitungstext für die Startseite.</p>
+            </div>
+
+            <div class="page" id="leistungen">
+                <h1>Unsere Leistungen</h1>
+                <p>Hier beschreibst du, was ihr anbietet.</p>
+            </div>
+
+            <div class="page" id="projekte">
+                <h1>Projekte</h1>
+                <p>Hier stellst du eure Projekte vor.</p>
+            </div>
+
+            <div class="page" id="ueberuns">
+                <h1>Über uns</h1>
+                <p>Hier erzählst du etwas über euer Team / Unternehmen.</p>
+            </div>
+
+            <div class="page" id="kontakt">
+                <h1>Kontakt</h1>
+                <p>Hier kommen eure Kontaktdaten oder ein Formular hin.</p>
+            </div>
         </div>
     </div>
 
