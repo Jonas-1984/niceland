@@ -494,7 +494,7 @@
 
 .gallery-caption {
     margin-top: 16px;
-    text-align: center;
+    text-align: left;
     font-size: 0.95rem;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.75);
@@ -673,4 +673,16 @@
 
 .social-links .nav-item::before {
     display: none;
+}
+
+.social-copyright {
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+    color: rgba(255, 255, 255, 0.55);
+    white-space: nowrap;
 }
