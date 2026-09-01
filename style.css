@@ -33,6 +33,10 @@
     align-items: center;
 }
 
+.mobile-stack {
+    display: contents;
+}
+
 .logo {
     position: absolute;
     top: 24px;
@@ -110,9 +114,10 @@
     height: 44px;
     transform: translate(-50%, -50%) scale(0.6);
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: rgba(255, 129, 0, 0.22);
+    border: 1px solid rgba(255, 129, 0, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     opacity: 0;
     z-index: 0;
     transition: opacity 0.2s ease, transform 0.2s ease;
@@ -120,12 +125,14 @@
 
 .nav-item:hover,
 .nav-item:focus,
+.nav-item:active,
 .nav-item.active {
     color: #ffffff;
 }
 
 .nav-item:hover::before,
 .nav-item:focus::before,
+.nav-item:active::before,
 .nav-item.active::before {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
@@ -191,6 +198,10 @@
     opacity: 0;
     transform: translateY(16px);
     animation: infoFadeIn 0.9s ease forwards;
+}
+
+.kontakt-info {
+    display: none;
 }
 
 .info-panel>*:nth-child(1) {
@@ -265,7 +276,8 @@
 }
 
 .info-line a:hover,
-.info-line a:focus {
+.info-line a:focus,
+.info-line a:active {
     color: #ffffff;
     text-decoration: underline;
 }
@@ -316,6 +328,10 @@
     font-size: 1.1rem;
     max-width: 600px;
     line-height: 1.6;
+}
+
+.home-intro {
+    display: none;
 }
 
 .ueberuns-content {
@@ -403,7 +419,8 @@
     transition: background 0.35s ease, box-shadow 0.35s ease;
 }
 
-.service-text:hover::before {
+.service-text:hover::before,
+.service-text:active::before {
     background: linear-gradient(to bottom,
             rgba(90, 170, 255, 0) 0%,
             rgba(90, 170, 255, 0.9) 12%,
@@ -416,12 +433,16 @@
     margin-top: 30px;
     width: 100%;
     max-width: calc(var(--box-width) - var(--info-panel-width) - 140px);
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .gallery-track {
     position: relative;
     width: 100%;
     height: 600px;
+    touch-action: pan-y;
 }
 
 .gallery-slide {
@@ -431,6 +452,7 @@
     z-index: 0;
     border-radius: 18px;
     overflow: hidden;
+    touch-action: pan-y;
 }
 
 .gallery-slide.active {
@@ -447,6 +469,7 @@
     border: 1px solid rgba(124, 124, 124, 0.6);
     border-radius: 20px;
     box-sizing: border-box;
+    touch-action: pan-y;
 }
 
 .gallery-slide figcaption {
@@ -483,7 +506,8 @@
 }
 
 .gallery-dot:hover,
-.gallery-dot:focus {
+.gallery-dot:focus,
+.gallery-dot:active {
     background: rgba(255, 255, 255, 0.6);
 }
 
@@ -494,12 +518,22 @@
 
 .gallery-caption {
     margin-top: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
     text-align: left;
     font-size: 0.95rem;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.75);
     min-height: 1.4em;
     transition: opacity 0.3s ease;
+}
+
+.gallery-caption svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 3px;
 }
 
 .contact-form {
@@ -600,12 +634,15 @@
     border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 999px;
     cursor: pointer;
-    transition: background 0.2s ease, transform 0.15s ease;
+    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
 }
 
 .form-submit:hover,
-.form-submit:focus {
+.form-submit:focus,
+.form-submit:active {
     background: rgba(255, 255, 255, 0.28);
+    border-color: rgba(90, 170, 255, 0.9);
+    box-shadow: 0 0 6px rgba(90, 170, 255, 0.8), 0 0 12px rgba(90, 170, 255, 0.5);
 }
 
 .form-submit:active {
@@ -632,10 +669,8 @@
     width: var(--box-width);
     height: 50px;
     display: flex;
-    justify-content: flex-start;
-    padding-left: 20px;
     align-items: center;
-    gap: 10px;
+    padding-left: 20px;
 
     border-radius: 100px;
     border: 1px solid rgba(238, 238, 238, 0.35);
@@ -650,7 +685,13 @@
         0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
-.social-links a {
+.social-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-icons a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -666,8 +707,9 @@
     display: block;
 }
 
-.social-links a:hover,
-.social-links a:focus {
+.social-icons a:hover,
+.social-icons a:focus,
+.social-icons a:active {
     transform: scale(1.15);
 }
 
@@ -675,14 +717,299 @@
     display: none;
 }
 
-.social-copyright {
+.social-meta {
     position: absolute;
     right: 28px;
     top: 50%;
     transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.social-copyright,
+.social-privacy {
     font-size: 0.8rem;
     font-weight: 300;
     letter-spacing: 0.2px;
     color: rgba(255, 255, 255, 0.55);
     white-space: nowrap;
+}
+
+.social-privacy {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.social-privacy:hover,
+.social-privacy:focus,
+.social-privacy:active {
+    color: #FF8100;
+}
+
+/* ===== Mobile-Version ===== */
+@media (max-width: 768px) {
+    :root {
+        --box-width: 94vw;
+    }
+
+    /* Ganze Seite scrollt natürlich mit dem Inhalt, statt nur intern im Viereck.
+       Dock, Viereck und Sozial-Leiste stehen dafür als normale Blöcke untereinander. */
+    .background {
+        padding: 20px 0 40px;
+    }
+
+    .mobile-stack {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: var(--box-width);
+        gap: 5px;
+    }
+
+    .glass-nav {
+        position: static;
+        transform: none;
+
+        flex-direction: row;
+        width: auto;
+        height: 54px;
+        padding: 0 22px;
+        gap: 20px;
+        border-radius: var(--border-radius);
+
+        background: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        box-shadow: none;
+        border: none;
+    }
+
+    .nav-item {
+        width: 24px;
+        height: 24px;
+    }
+
+    .glass-box {
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: 88vh;
+        overflow: visible;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .glass-box>.logo {
+        display: none;
+    }
+
+    .page .logo {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        height: 88px;
+        width: auto;
+        padding: 10px 14px;
+        border-radius: 14px;
+        background: rgba(90, 90, 90, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    .home-intro {
+        display: block;
+        position: absolute;
+        top: 16px;
+        left: 20px;
+        z-index: 2;
+    }
+
+    .home-intro h1 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-align: left;
+
+        color: #2f5fc7;
+    }
+
+    .home-intro p {
+        margin: 10px 0 0;
+        font-size: 0.85rem;
+    }
+
+    #home>h1,
+    #home>p,
+    #leistungen>h1,
+    #leistungen>p,
+    #kontakt>h1,
+    #kontakt>p,
+    #ueberuns>h1,
+    #ueberuns>p,
+    #projekte>h1,
+    #projekte>p {
+        display: none;
+    }
+
+    .ueberuns-content {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 24px;
+        gap: 16px;
+    }
+
+    .ueberuns-text {
+        order: 1;
+    }
+
+    .ueberuns-image {
+        order: 2;
+        width: 140px;
+        height: 140px;
+        margin-top: 0;
+        margin-right: 0;
+    }
+
+    .page>h1 {
+        font-size: 10px;
+        font-weight: 700;
+    }
+
+    .page>p {
+        font-size: 8px;
+    }
+
+    .glass-box::after {
+        display: none;
+    }
+
+    .info-panel {
+        display: none;
+    }
+
+    .kontakt-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        width: 100%;
+        margin-top: 24px;
+        text-align: left;
+    }
+
+    .kontakt-info .info-title {
+        font-size: 1.3rem;
+    }
+
+    .kontakt-info .map-frame {
+        width: 100%;
+    }
+
+    .page {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        display: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        padding: 140px 20px 40px;
+    }
+
+    .page.active {
+        display: flex;
+    }
+
+    .gallery,
+    .services-grid,
+    .contact-form {
+        max-width: 100%;
+    }
+
+    .gallery-track {
+        height: auto;
+        aspect-ratio: 4 / 5;
+    }
+
+    .gallery-slide figcaption {
+        display: none;
+    }
+
+    .gallery-caption {
+        font-size: 10px;
+    }
+
+    .gallery-caption svg {
+        margin-top: 5px;
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        touch-action: pan-y;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .service-item {
+        grid-area: 1 / 1;
+        width: 100%;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    .service-item.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .service-image {
+        height: auto;
+        aspect-ratio: 4 / 5;
+    }
+
+    .service-text {
+        font-size: 10px;
+    }
+
+    .social-links {
+        position: static;
+        transform: none;
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+        width: 100%;
+        padding: 18px 20px;
+        gap: 14px;
+        border-radius: var(--border-radius);
+    }
+
+    .social-icons {
+        justify-content: center;
+        gap: 26px;
+    }
+
+    .social-meta {
+        position: static;
+        transform: none;
+        flex-direction: column;
+        gap: 4px;
+        flex-wrap: nowrap;
+    }
+
+    .social-privacy {
+        position: static;
+        transform: none;
+    }
 }
