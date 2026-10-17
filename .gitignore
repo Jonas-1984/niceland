@@ -1,0 +1,13 @@
+# Betriebssystem / Editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.vscode/
+.idea/
+
+# Lokale Test-Dateien
+_tmp*.html
+*.log
+.env

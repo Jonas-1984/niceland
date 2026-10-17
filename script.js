@@ -1,21 +1,65 @@
 document.addEventListener("DOMContentLoaded", () => {
     const navItems = document.querySelectorAll(".nav-item");
     const pages = document.querySelectorAll(".page");
+    const nav = document.querySelector(".glass-nav");
+    const homeItem = nav ? nav.querySelector('.nav-item[data-target="home"]') : null;
+
+    // Mobile-Version: Wetter, Datum/Uhrzeit und Wochentag/KW werden nicht angezeigt
+    const mobileQuery = window.matchMedia("(max-width: 768px)");
+
+    // Mobile-Version: Menü ist eingeklappt (nur Home-Symbol) und klappt per Antippen auf
+    const setNavOpen = (open) => {
+        if (!nav) return;
+        nav.classList.toggle("open", open);
+        if (homeItem) {
+            if (mobileQuery.matches) homeItem.setAttribute("aria-expanded", String(open));
+            else homeItem.removeAttribute("aria-expanded");
+        }
+    };
+
+    const showPage = (targetId) => {
+        document.body.dataset.page = targetId;
+        // Aktive Klasse nur beim passenden Nav-Item setzen
+        navItems.forEach((nav) => nav.classList.toggle("active", nav.getAttribute("data-target") === targetId));
+
+        // Passende Seite anzeigen, alle anderen ausblenden
+        pages.forEach((page) => {
+            page.classList.toggle("active", page.id === targetId);
+        });
+    };
 
     navItems.forEach((item) => {
         item.addEventListener("click", (e) => {
             e.preventDefault();
 
-            const targetId = item.getAttribute("data-target");
+            // Erstes Antippen des Home-Symbols (Mobile) öffnet nur das Menü
+            if (mobileQuery.matches && nav && !nav.classList.contains("open")) {
+                setNavOpen(true);
+                return;
+            }
 
-            // Aktive Klasse von Nav-Items entfernen
-            navItems.forEach((nav) => nav.classList.remove("active"));
-            item.classList.add("active");
+            showPage(item.getAttribute("data-target"));
+            setNavOpen(false);
+        });
+    });
 
-            // Passende Seite anzeigen, alle anderen ausblenden
-            pages.forEach((page) => {
-                page.classList.toggle("active", page.id === targetId);
-            });
+    // Menü schließen: Tippen außerhalb, Escape oder Wechsel zur Desktop-Ansicht
+    document.addEventListener("click", (e) => {
+        if (nav && nav.classList.contains("open") && !nav.contains(e.target)) setNavOpen(false);
+    });
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") setNavOpen(false);
+    });
+    mobileQuery.addEventListener("change", () => setNavOpen(false));
+    setNavOpen(false);
+    document.body.dataset.page = (document.querySelector(".page.active") || {}).id || "home";
+
+    // Klick auf das Logo führt zurück zur Startseite
+    document.querySelectorAll(".logo, .topbar-logo").forEach((logo) => {
+        logo.addEventListener("click", () => {
+            showPage("home");
+            setNavOpen(false);
+            window.scrollTo({ top: 0 });
         });
     });
 
@@ -237,14 +281,178 @@ document.addEventListener("DOMContentLoaded", () => {
     const contactForm = document.getElementById("contact-form");
     if (contactForm) {
         const successMessage = document.getElementById("contact-form-success");
+        const errorMessage = document.getElementById("contact-form-error");
+        const submitButton = contactForm.querySelector(".form-submit");
+        const submitLabel = submitButton.textContent;
+        const formOpenedAt = Date.now();
+        const FALLBACK_ERROR = "Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut oder schreiben Sie uns direkt an info@niceland-hamburg.de.";
 
-        contactForm.addEventListener("submit", (e) => {
+        const showMessage = (el, text) => {
+            successMessage.classList.remove("visible");
+            errorMessage.classList.remove("visible");
+            if (text) el.textContent = text;
+            el.classList.add("visible");
+        };
+
+        contactForm.addEventListener("submit", async (e) => {
             e.preventDefault();
 
             if (!contactForm.reportValidity()) return;
 
-            successMessage.classList.add("visible");
-            contactForm.reset();
+            const data = new FormData(contactForm);
+            // Sekunden seit dem Laden der Seite (Spam-Schutz, siehe send-mail.php)
+            data.set("t", String(Math.round((Date.now() - formOpenedAt) / 1000)));
+
+            submitButton.disabled = true;
+            submitButton.textContent = "Wird gesendet …";
+            successMessage.classList.remove("visible");
+            errorMessage.classList.remove("visible");
+
+            try {
+                const response = await fetch(contactForm.getAttribute("action"), { method: "POST", body: data });
+                const result = await response.json();
+
+                if (response.ok && result.ok) {
+                    showMessage(successMessage, result.message);
+                    contactForm.reset();
+                } else {
+                    showMessage(errorMessage, result.message || FALLBACK_ERROR);
+                }
+            } catch (err) {
+                showMessage(errorMessage, FALLBACK_ERROR);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = submitLabel;
+            }
         });
+    }
+
+    // ===== Footer: Wetter, Datum/Uhrzeit, Wochentag/KW (nur nach Einwilligung) =====
+    const weatherEl = document.getElementById("footer-weather");
+    const datetimeEl = document.getElementById("footer-datetime");
+    const weekEl = document.getElementById("footer-week");
+
+    const TIME_ZONE = "Europe/Berlin";
+
+    // Platzhalter mit Aktivieren-Schaltfläche, solange keine Einwilligung vorliegt
+    const showOptIn = (el, key, label) => {
+        el.textContent = "";
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "footer-optin";
+        button.setAttribute("data-optin", key);
+        button.textContent = label;
+        el.appendChild(button);
+    };
+
+    // ISO-8601-Kalenderwoche
+    const getIsoWeek = (date) => {
+        const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+        const dayNum = d.getUTCDay() || 7;
+        d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+        const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+        return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+    };
+
+    const dateFormat = new Intl.DateTimeFormat("de-DE", { timeZone: TIME_ZONE, day: "2-digit", month: "2-digit", year: "numeric" });
+    const timeFormat = new Intl.DateTimeFormat("de-DE", { timeZone: TIME_ZONE, hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    const weekdayFormat = new Intl.DateTimeFormat("de-DE", { timeZone: TIME_ZONE, weekday: "long" });
+
+    let clockTimer = null;
+
+    const updateClock = () => {
+        const now = new Date();
+        datetimeEl.textContent = `${dateFormat.format(now)} · ${timeFormat.format(now)} Uhr`;
+        // Datum in Berliner Zeit für die Wochennummer verwenden
+        const berlin = new Date(now.toLocaleString("en-US", { timeZone: TIME_ZONE }));
+        weekEl.textContent = `${weekdayFormat.format(now)} · KW ${getIsoWeek(berlin)}`;
+    };
+
+    const startClock = () => {
+        if (clockTimer) return;
+        updateClock();
+        clockTimer = setInterval(updateClock, 1000);
+    };
+
+    const stopClock = () => {
+        clearInterval(clockTimer);
+        clockTimer = null;
+        showOptIn(datetimeEl, "datetime", "Datum & Uhrzeit anzeigen");
+        weekEl.textContent = "–";
+    };
+
+    // Wetterdaten des Deutschen Wetterdienstes (DWD) über Bright Sky, Station Hamburg
+    const WEATHER_LABELS = {
+        "clear-day": "Klar",
+        "clear-night": "Klar",
+        "partly-cloudy-day": "Teils bewölkt",
+        "partly-cloudy-night": "Teils bewölkt",
+        "cloudy": "Bewölkt",
+        "fog": "Nebel",
+        "wind": "Windig",
+        "rain": "Regen",
+        "sleet": "Schneeregen",
+        "snow": "Schnee",
+        "hail": "Hagel",
+        "thunderstorm": "Gewitter"
+    };
+
+    const WEATHER_URL = "https://api.brightsky.dev/current_weather?lat=53.55&lon=9.99&tz=Europe%2FBerlin&units=dwd";
+
+    let weatherTimer = null;
+    let weatherRequestId = 0;
+
+    const loadWeather = async () => {
+        const requestId = ++weatherRequestId;
+        try {
+            const response = await fetch(WEATHER_URL, { referrerPolicy: "no-referrer" });
+            if (!response.ok) throw new Error(response.status);
+            const { weather } = await response.json();
+            if (requestId !== weatherRequestId || !weatherTimer) return;
+
+            const parts = [`HH ${Math.round(weather.temperature)} °C`];
+            if (WEATHER_LABELS[weather.icon]) parts.push(WEATHER_LABELS[weather.icon]);
+            if (weather.wind_speed_10 != null) parts.push(`Wind ${Math.round(weather.wind_speed_10)} km/h`);
+            if (weather.relative_humidity != null) parts.push(`${Math.round(weather.relative_humidity)} %`);
+
+            weatherEl.textContent = parts.join(" · ");
+            weatherEl.title = "Wetter Hamburg: Temperatur, Wetterlage, Wind, Luftfeuchtigkeit. Quelle: Deutscher Wetterdienst (DWD) über Bright Sky";
+        } catch (err) {
+            if (requestId === weatherRequestId && weatherTimer) {
+                weatherEl.textContent = "Wetter derzeit nicht verfügbar";
+            }
+        }
+    };
+
+    const startWeather = () => {
+        if (weatherTimer) return;
+        weatherEl.textContent = "Wetter wird geladen …";
+        weatherTimer = setInterval(loadWeather, 15 * 60 * 1000);
+        loadWeather();
+    };
+
+    const stopWeather = () => {
+        clearInterval(weatherTimer);
+        weatherTimer = null;
+        weatherRequestId++;
+        weatherEl.removeAttribute("title");
+        showOptIn(weatherEl, "weather", "Wetter anzeigen");
+    };
+
+    if (weatherEl && datetimeEl && weekEl && window.NicelandConsent) {
+        let consentState = { weather: false, datetime: false };
+
+        // Nur auf größeren Bildschirmen und nur mit Einwilligung: sonst keine Abrufe und keine Uhr
+        const applyFooter = () => {
+            const show = !mobileQuery.matches;
+            if (show && consentState.weather) startWeather(); else stopWeather();
+            if (show && consentState.datetime) startClock(); else stopClock();
+        };
+
+        window.NicelandConsent.subscribe((consent) => {
+            consentState = consent;
+            applyFooter();
+        });
+        mobileQuery.addEventListener("change", applyFooter);
     }
 });

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /send-mail.php
 
 Sitemap: https://www.niceland-hamburg.de/sitemap.xml

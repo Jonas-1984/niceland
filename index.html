@@ -18,21 +18,53 @@
     <meta property="og:url" content="https://www.niceland-hamburg.de/">
     <meta property="og:image" content="https://www.niceland-hamburg.de/image/Background.jpg">
 
-    <link rel="icon" type="image/png" href="image/NiceLand.png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="image/NiceLand.svg">
+    <link rel="icon" type="image/png" sizes="192x192" href="image/favicon-192.png">
+    <link rel="apple-touch-icon" href="image/apple-touch-icon.png">
+    <meta name="theme-color" content="#1c1e21">
+    <link rel="preload" as="image" href="image/Background.webp" type="image/webp" media="(min-width: 769px)">
+    <link rel="preload" as="image" href="image/Background-mobile.webp" type="image/webp" media="(max-width: 768px)">
+    <meta property="og:site_name" content="Niceland">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HomeAndConstructionBusiness",
+        "name": "Niceland – Innenausbau & Malerarbeiten",
+        "description": "Innenausbau und Malerarbeiten: Wandgestaltung, Bodenbelag, Fenster und Türen.",
+        "url": "https://www.niceland-hamburg.de/",
+        "image": "https://www.niceland-hamburg.de/image/Background.jpg",
+        "logo": "https://www.niceland-hamburg.de/image/NiceLand.svg",
+        "telephone": "+49 451 20207131",
+        "email": "info@niceland-hamburg.de",
+        "founder": { "@type": "Person", "name": "Kazem Moradi" },
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "St.-Annen-Straße 16A",
+            "postalCode": "23552",
+            "addressLocality": "Lübeck",
+            "addressCountry": "DE"
+        },
+        "areaServed": ["Hamburg", "Lübeck"]
+    }
+    </script>
+    <link rel="stylesheet" href="style.css?v=20261017">
+    <link rel="stylesheet" href="consent.css?v=20261017">
 </head>
 
-<body>
+<body data-page="home">
     <div class="background">
         <div class="mobile-stack">
+        <div class="mobile-topbar">
+        <img class="topbar-logo" src="image/NiceLand.svg" alt="Niceland Logo">
         <nav class="glass-nav">
-            <a href="#" class="nav-item active" title="Home" data-target="home">
+            <a href="#" class="nav-item active" aria-label="Home" data-tip="Home" data-target="home">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path d="M3 9.5 12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V9.5Z" />
                 </svg>
             </a>
-            <a href="#" class="nav-item" title="Leistungen" data-target="leistungen">
+            <a href="#" class="nav-item" aria-label="Leistungen" data-tip="Leistungen" data-target="leistungen">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <rect x="3" y="8" width="18" height="12" rx="2" />
@@ -40,20 +72,20 @@
                     <path d="M3 13h18" />
                 </svg>
             </a>
-            <a href="#" class="nav-item" title="Projekte" data-target="projekte">
+            <a href="#" class="nav-item" aria-label="Projekte" data-tip="Projekte" data-target="projekte">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" />
                 </svg>
             </a>
-            <a href="#" class="nav-item" title="Über uns" data-target="ueberuns">
+            <a href="#" class="nav-item" aria-label="Über uns" data-tip="Über uns" data-target="ueberuns">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <circle cx="12" cy="8" r="4" />
                     <path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1" />
                 </svg>
             </a>
-            <a href="#" class="nav-item" title="Kontakt" data-target="kontakt">
+            <a href="#" class="nav-item" aria-label="Kontakt" data-tip="Kontakt" data-target="kontakt">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
@@ -61,95 +93,94 @@
                 </svg>
             </a>
         </nav>
+        </div>
 
         <div class="glass-box">
-            <img class="logo" src="image/NiceLand.png" alt="Niceland Logo">
+            <img class="logo" src="image/NiceLand.svg" alt="Niceland Logo">
 
             <div class="info-panel">
                 <h2 class="info-title">Niceland</h2>
                 <p class="info-subtitle">Innenausbau &amp; Malerarbeiten</p>
                 <p class="info-name">Kazem Moradi</p>
                 <p class="info-line">in Hamburg und Umgebung</p>
-                <p class="info-line"><a href="tel:017682196895">0176-82196895</a></p>
-                <p class="info-line"><a href="mailto:niceland@mail.de">niceland@mail.de</a></p>
+                <p class="info-line"><a href="tel:+4917682196895">0176-82196895</a></p>
+                <p class="info-line"><a href="mailto:info@niceland-hamburg.de">info@niceland-hamburg.de</a></p>
                 <p class="info-line"><a href="https://www.niceland-hamburg.de" target="_blank"
                         rel="noopener">www.niceland-hamburg.de</a></p>
 
-                <div class="map-frame">
-                    <iframe src="https://www.google.com/maps?q=Hamburg&output=embed" title="Karte von Hamburg"
-                        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                <div class="map-frame" data-map-src="https://www.google.com/maps?q=Hamburg&amp;output=embed">
                 </div>
             </div>
 
             <div class="page active" id="home">
-                <img class="logo" src="image/NiceLand.png" alt="Niceland Logo">
+                <img class="logo" src="image/NiceLand.svg" alt="Niceland Logo">
                 <div class="home-intro">
-                    <h1>Niceland</h1>
-                    <p>Räume neu gedacht</p>
+                    <div class="home-intro-title">Niceland</div>
+                    <p>Handwerk mit Herz. Qualität mit Leidenschaft</p>
                 </div>
-                <h1>Willkommen bei meiner Website</h1>
-                <p>Wandgestaltung, Bodenbelag, Fenster und Türen</p>
+                <h1>Niceland</h1>
+                <p>Handwerk mit Herz. Qualität mit Leidenschaft</p>
 
                 <div class="gallery">
                     <div class="gallery-track">
                         <figure class="gallery-slide active"
                             data-desc="Fachgerechtes Verlegen verschiedener Bodenarten für ein sauberes und langlebiges Ergebnis.">
-                            <img src="image/gallery/1.jpg" alt="Projekt 1">
+                            <img src="image/gallery/1.jpg" alt="Projektbeispiel: Bodenbelag" width="1200" height="800" decoding="async">
                             <figcaption>Bodenbelag</figcaption>
                         </figure>
                         <figure class="gallery-slide"
                             data-desc="Präzise und gleichmäßige Anstriche für ein frisches und gepflegtes Raumgefühl.">
-                            <img src="image/gallery/2.jpg" alt="Projekt 2" loading="lazy">
+                            <img src="image/gallery/2.jpg" alt="Projektbeispiel: Malerarbeit" width="1200" height="800" decoding="async" loading="lazy">
                             <figcaption>Malerarbeit</figcaption>
                         </figure>
                         <figure class="gallery-slide"
                             data-desc="Planung und Bau stabiler, lichtdurchfluteter Gewächshäuser und Wintergärten.">
-                            <img src="image/gallery/3.jpg" alt="Projekt 3" loading="lazy">
-                            <figcaption>Gewächshaus_und_Wintergarten</figcaption>
+                            <img src="image/gallery/3.jpg" alt="Projektbeispiel: Gewächshaus und Wintergarten" width="1200" height="800" decoding="async" loading="lazy">
+                            <figcaption>Gewächshaus und Wintergarten</figcaption>
                         </figure>
                         <figure class="gallery-slide"
                             data-desc="Sorgfältige Modernisierung und Instandsetzung von Wohn- und Arbeitsbereichen.">
-                            <img src="image/gallery/4.jpg" alt="Projekt 4" loading="lazy">
+                            <img src="image/gallery/4.jpg" alt="Projektbeispiel: Renovierung" width="1200" height="800" decoding="async" loading="lazy">
                             <figcaption>Renovierung</figcaption>
                         </figure>
                         <figure class="gallery-slide"
                             data-desc="Montage robuster Terrassendielen für eine hochwertige Außenfläche.">
-                            <img src="image/gallery/5.jpg" alt="Projekt 5" loading="lazy">
+                            <img src="image/gallery/5.jpg" alt="Projektbeispiel: Terrassendiele" width="1200" height="800" decoding="async" loading="lazy">
                             <figcaption>Terrassendiele</figcaption>
                         </figure>
                         <figure class="gallery-slide"
                             data-desc="Passgenauer Einbau von Fenstern und Türen für optimale Funktion und Optik.">
-                            <img src="image/gallery/6.jpg" alt="Projekt 6" loading="lazy">
+                            <img src="image/gallery/6.jpg" alt="Projektbeispiel: Fenster und Türen" width="1200" height="800" decoding="async" loading="lazy">
                             <figcaption>Fenster und Türen</figcaption>
                         </figure>
                         <figure class="gallery-slide"
                             data-desc="Einsatz vielfältiger Materialien und Farbtöne für maßgeschneiderte Ergebnisse.">
-                            <img src="image/gallery/7.jpg" alt="Projekt 7" loading="lazy">
-                            <figcaption>Verschiedene Materialen</figcaption>
+                            <img src="image/gallery/7.jpg" alt="Projektbeispiel: Verschiedene Materialien" width="1200" height="800" decoding="async" loading="lazy">
+                            <figcaption>Verschiedene Materialien</figcaption>
                         </figure>
                         <figure class="gallery-slide"
                             data-desc="Gestaltung funktionaler und moderner Badezimmer mit hochwertigen Materialien.">
-                            <img src="image/gallery/8.jpg" alt="Projekt 8" loading="lazy">
+                            <img src="image/gallery/8.jpg" alt="Projektbeispiel: Badezimmer" width="1200" height="800" decoding="async" loading="lazy">
                             <figcaption>Badezimmer</figcaption>
                         </figure>
                         <figure class="gallery-slide"
                             data-desc="Montage robuster Terrassendielen für eine hochwertige Außenfläche.">
-                            <img src="image/gallery/9.jpg" alt="Projekt 9" loading="lazy">
+                            <img src="image/gallery/9.jpg" alt="Projektbeispiel: Terrassendiele" width="1200" height="800" decoding="async" loading="lazy">
                             <figcaption>Terrassendiele</figcaption>
                         </figure>
                         <figure class="gallery-slide"
                             data-desc="Kreative Gestaltung von Wänden für ein individuelles Raumdesign.">
-                            <img src="image/gallery/10.jpg" alt="Projekt 10" loading="lazy">
+                            <img src="image/gallery/10.jpg" alt="Projektbeispiel: Wandgestaltung" width="1200" height="800" decoding="async" loading="lazy">
                             <figcaption>Wandgestaltung</figcaption>
                         </figure>
                         <figure class="gallery-slide"
                             data-desc="Einsatz vielfältiger Materialien und Farbtöne für maßgeschneiderte Ergebnisse.">
-                            <img src="image/gallery/11.jpg" alt="Projekt 11" loading="lazy">
-                            <figcaption>VerschiedeneFarben</figcaption>
+                            <img src="image/gallery/11.jpg" alt="Projektbeispiel: Verschiedene Farben" width="1200" height="800" decoding="async" loading="lazy">
+                            <figcaption>Verschiedene Farben</figcaption>
                         </figure>
                         <figure class="gallery-slide"
                             data-desc="Präzise Montage und Anpassung von Küchen für eine stabile und harmonische Einrichtung.">
-                            <img src="image/gallery/12.jpg" alt="Projekt 12" loading="lazy">
+                            <img src="image/gallery/12.jpg" alt="Projektbeispiel: Küchen" width="1200" height="800" decoding="async" loading="lazy">
                             <figcaption>Küchen</figcaption>
                         </figure>
                     </div>
@@ -180,30 +211,30 @@
             </div>
 
             <div class="page" id="leistungen">
-                <img class="logo" src="image/NiceLand.png" alt="Niceland Logo">
+                <img class="logo" src="image/NiceLand.svg" alt="Niceland Logo">
                 <div class="home-intro">
-                    <h1>Niceland</h1>
+                    <div class="home-intro-title">Niceland</div>
                     <p>Räume neu gedacht</p>
                 </div>
-                <h1>Unsere Leistungen</h1>
+                <h2>Unsere Leistungen</h2>
                 <p>Ich biete Ihnen zuverlässige Handwerksarbeiten</p>
 
                 <div class="services-grid">
                     <div class="service-item active">
                         <div class="service-image">
-                            <img src="image/leistungen/1.jpg" alt="Leistung 1">
+                            <img src="image/leistungen/1.jpg" alt="Malerarbeiten: Wandgestaltung und Anstrich" width="667" height="1000" decoding="async">
                         </div>
-                        <p class="service-text">Ob einfacher Anstrich, Tapette, Wandverkleidung, Zierprofile, wir beraten Sie gern und führen die Arbeiten sorgsam und termingerecht aus.</p>
+                        <p class="service-text">Ob einfacher Anstrich, Tapete, Wandverkleidung, Zierprofile, wir beraten Sie gern und führen die Arbeiten sorgsam und termingerecht aus.</p>
                     </div>
                     <div class="service-item">
                         <div class="service-image">
-                            <img src="image/leistungen/2.jpg" alt="Leistung 2" loading="lazy">
+                            <img src="image/leistungen/2.jpg" alt="Bodenbelag verlegen" width="560" height="1000" decoding="async" loading="lazy">
                         </div>
                         <p class="service-text">Fliesen, Holzdielen, Laminat, Teppich, wir verlegen fachgerecht Ihren Wunschbodenbelag und kümmern uns auch um Sockelleisten ob aus Holz oder Fliesen.</p>
                     </div>
                     <div class="service-item">
                         <div class="service-image">
-                            <img src="image/leistungen/3.jpg" alt="Leistung 3" loading="lazy">
+                            <img src="image/leistungen/3.jpg" alt="Fenster und Türen einbauen" width="667" height="1000" decoding="async" loading="lazy">
                         </div>
                         <p class="service-text">Wir bauen Ihre Fenster und Türen, genormte und nach Maß gefertigte ein.</p>
                     </div>
@@ -211,58 +242,65 @@
             </div>
 
             <div class="page" id="projekte">
-                <img class="logo" src="image/NiceLand.png" alt="Niceland Logo">
+                <img class="logo" src="image/NiceLand.svg" alt="Niceland Logo">
                 <div class="home-intro">
-                    <h1>Niceland</h1>
+                    <div class="home-intro-title">Niceland</div>
                     <p>Räume neu gedacht</p>
                 </div>
-                <h1>Projekte</h1>
-                <p>Hier stellst du eure Projekte vor.</p>
+                <h2>Projekte</h2>
+                <p>Ausgewählte Projekte zeigen wir Ihnen in Kürze.</p>
             </div>
 
             <div class="page" id="ueberuns">
-                <img class="logo" src="image/NiceLand.png" alt="Niceland Logo">
+                <img class="logo" src="image/NiceLand.svg" alt="Niceland Logo">
                 <div class="home-intro">
-                    <h1>Niceland</h1>
+                    <div class="home-intro-title">Niceland</div>
                     <p>Räume neu gedacht</p>
                 </div>
-                <h1>Über uns</h1>
+                <h2>Über uns</h2>
                 <p>Wir schaffen Qualität, die man sieht.</p>
 
                 <div class="ueberuns-content">
                     <div class="ueberuns-image">
-                        <img src="image/ueberuns.png" alt="Über uns" loading="lazy">
+                        <img src="image/ueberuns.webp" alt="Illustration: Handwerker mit Werkzeug" width="500" height="918" loading="lazy" decoding="async">
                     </div>
-                    <p class="ueberuns-text">Ich biete professionelle Renovierungs und Ausbauarbeiten aus einer Hand. Von kreativer Wandgestaltung über fachgerechte Bodenverlegung bis hin zum präzisen Einbau von Fenstern und Tueren führe ich alle Arbeiten sorgfältig, zuverlässig und termingerecht aus. Mit handwerklichem Können und Liebe zum Detail sorge ich dafür, dass Ihr Zuhause genau Ihren Vorstellungen entspricht.</p>
+                    <div class="ueberuns-body">
+                        <div class="ueberuns-head">
+                            <svg class="ueberuns-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="10.5" cy="10.5" r="6.5"></circle>
+                                <line x1="15.5" y1="15.5" x2="21" y2="21"></line>
+                            </svg>
+                            <span class="ueberuns-line"></span>
+                        </div>
+                        <p class="ueberuns-text">Ich biete professionelle Renovierungs- und Ausbauarbeiten aus einer Hand. Von kreativer Wandgestaltung über fachgerechte Bodenverlegung bis hin zum präzisen Einbau von Fenstern und Türen führe ich alle Arbeiten sorgfältig, zuverlässig und termingerecht aus. Mit handwerklichem Können und Liebe zum Detail sorge ich dafür, dass Ihr Zuhause genau Ihren Vorstellungen entspricht.</p>
+                    </div>
                 </div>
             </div>
 
             <div class="page" id="kontakt">
-                <img class="logo" src="image/NiceLand.png" alt="Niceland Logo">
+                <img class="logo" src="image/NiceLand.svg" alt="Niceland Logo">
                 <div class="home-intro">
-                    <h1>Niceland</h1>
+                    <div class="home-intro-title">Niceland</div>
                     <p>Räume neu gedacht</p>
                 </div>
-                <h1>Kontakt</h1>
-                <p>Schreib uns eine Nachricht, wir melden uns schnellstmöglich zurück.</p>
+                <h2>Kontakt</h2>
+                <p>Schreiben Sie uns eine Nachricht, wir melden uns schnellstmöglich bei Ihnen.</p>
 
                 <div class="kontakt-info">
                     <h2 class="info-title">Niceland</h2>
                     <p class="info-subtitle">Innenausbau &amp; Malerarbeiten</p>
                     <p class="info-name">Kazem Moradi</p>
                     <p class="info-line">in Hamburg und Umgebung</p>
-                    <p class="info-line"><a href="tel:017682196895">0176-82196895</a></p>
-                    <p class="info-line"><a href="mailto:niceland@mail.de">niceland@mail.de</a></p>
+                    <p class="info-line"><a href="tel:+4917682196895">0176-82196895</a></p>
+                    <p class="info-line"><a href="mailto:info@niceland-hamburg.de">info@niceland-hamburg.de</a></p>
                     <p class="info-line"><a href="https://www.niceland-hamburg.de" target="_blank"
                             rel="noopener">www.niceland-hamburg.de</a></p>
 
-                    <div class="map-frame">
-                        <iframe src="https://www.google.com/maps?q=Hamburg&output=embed" title="Karte von Hamburg"
-                            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                    <div class="map-frame" data-map-src="https://www.google.com/maps?q=Hamburg&amp;output=embed">
                     </div>
                 </div>
 
-                <form class="contact-form" id="contact-form">
+                <form class="contact-form" id="contact-form" method="post" action="send-mail.php">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="cf-name">Name</label>
@@ -292,46 +330,80 @@
 
                     <label class="consent-group" for="cf-consent">
                         <input type="checkbox" id="cf-consent" name="consent" required>
-                        <span>Ich habe die <a href="#" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen
+                        <span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen
                             und bin damit einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage
                             elektronisch erhoben und gespeichert werden. Meine Daten werden ausschließlich zur
                             Beantwortung meines Anliegens verwendet und nicht an Dritte weitergegeben.</span>
                     </label>
 
+                    <div class="form-hp" aria-hidden="true">
+                        <label for="cf-website">Website (bitte leer lassen)</label>
+                        <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+
                     <button type="submit" class="form-submit">Nachricht senden</button>
 
-                    <p class="form-success" id="contact-form-success">Danke für deine Nachricht! Wir melden uns
-                        schnellstmöglich bei dir.</p>
+                    <p class="form-success" id="contact-form-success" role="status">Danke für Ihre Nachricht! Wir melden uns
+                        schnellstmöglich bei Ihnen.</p>
+                    <p class="form-error" id="contact-form-error" role="alert"></p>
                 </form>
             </div>
         </div>
 
         <div class="social-links">
-            <div class="social-icons">
-                <a href="https://www.youtube.com/" target="_blank" rel="noopener" title="YouTube">
-                    <img src="image/icon/youtube.png" alt="YouTube">
-                </a>
-                <a href="https://www.facebook.com/" target="_blank" rel="noopener" title="Facebook">
-                    <img src="image/icon/facebook.png" alt="Facebook">
-                </a>
-                <a href="https://www.linkedin.com/" target="_blank" rel="noopener" title="LinkedIn">
-                    <img src="image/icon/linkedin.png" alt="LinkedIn">
-                </a>
-                <a href="https://www.instagram.com/" target="_blank" rel="noopener" title="Instagram">
-                    <img src="image/icon/insta.png" alt="Instagram">
-                </a>
+            <div class="footer-row">
+                <div class="footer-cell social-icons">
+                    <div class="icon-content">
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener" data-social="instagram" aria-label="Instagram">
+                            <div class="filled"></div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
+                            </svg>
+                        </a>
+                        <div class="tooltip">Instagram</div>
+                    </div>
+                    <div class="icon-content">
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" data-social="linkedin" aria-label="LinkedIn">
+                            <div class="filled"></div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                        <div class="tooltip">LinkedIn</div>
+                    </div>
+                    <div class="icon-content">
+                        <a href="https://www.youtube.com/" target="_blank" rel="noopener" data-social="youtube" aria-label="YouTube">
+                            <div class="filled"></div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                            </svg>
+                        </a>
+                        <div class="tooltip">YouTube</div>
+                    </div>
+                </div>
+                <div class="footer-cell"><a href="#" class="footer-link" data-open-cookie-settings>Cookies</a></div>
+                <div class="footer-cell"><a href="impressum.html" class="footer-link">Impressum</a></div>
+                <div class="footer-cell"><a href="datenschutz.html" class="footer-link">Datenschutzerklärung</a></div>
             </div>
 
-            <div class="social-meta">
-                <span class="social-copyright">&copy; 2026 Jonas Shojaei &ndash; Design &amp; Umsetzung</span>
+            <div class="footer-row">
+                <div class="footer-cell" id="footer-weather"></div>
+                <div class="footer-cell" id="footer-datetime"></div>
+                <div class="footer-cell" id="footer-week"></div>
+                <div class="footer-cell">Webdesigner: Jonas&nbsp;(<a href="https://bitbins.de" target="_blank"
+                        rel="noopener" class="footer-link">bitbins.de</a>)</div>
             </div>
-
-            <a href="#" target="_blank" rel="noopener" class="social-privacy">Datenschutzerklärung</a>
         </div>
         </div>
     </div>
 
-    <script src="script.js" defer></script>
+    <script src="consent.js?v=20261017" defer></script>
+    <script src="script.js?v=20261017" defer></script>
 </body>
 
 </html>
