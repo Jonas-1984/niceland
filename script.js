@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nav = document.querySelector(".glass-nav");
     const homeItem = nav ? nav.querySelector('.nav-item[data-target="home"]') : null;
 
-    // Mobile-Version: Wetter, Datum/Uhrzeit und Wochentag/KW werden nicht angezeigt
+    // Mobile-Version: Datum/Uhrzeit und Wochentag/KW werden nicht angezeigt
     const mobileQuery = window.matchMedia("(max-width: 768px)");
 
     // Mobile-Version: Menü ist eingeklappt (nur Home-Symbol) und klappt per Antippen auf
@@ -327,8 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ===== Footer: Wetter, Datum/Uhrzeit, Wochentag/KW (nur nach Einwilligung) =====
-    const weatherEl = document.getElementById("footer-weather");
+    // ===== Footer: Datum/Uhrzeit, Wochentag/KW (nur nach Einwilligung) =====
     const datetimeEl = document.getElementById("footer-datetime");
     const weekEl = document.getElementById("footer-week");
 
@@ -381,72 +380,12 @@ document.addEventListener("DOMContentLoaded", () => {
         weekEl.textContent = "–";
     };
 
-    // Wetterdaten des Deutschen Wetterdienstes (DWD) über Bright Sky, Station Hamburg
-    const WEATHER_LABELS = {
-        "clear-day": "Klar",
-        "clear-night": "Klar",
-        "partly-cloudy-day": "Teils bewölkt",
-        "partly-cloudy-night": "Teils bewölkt",
-        "cloudy": "Bewölkt",
-        "fog": "Nebel",
-        "wind": "Windig",
-        "rain": "Regen",
-        "sleet": "Schneeregen",
-        "snow": "Schnee",
-        "hail": "Hagel",
-        "thunderstorm": "Gewitter"
-    };
+    if (datetimeEl && weekEl && window.NicelandConsent) {
+        let consentState = { datetime: false };
 
-    const WEATHER_URL = "https://api.brightsky.dev/current_weather?lat=53.55&lon=9.99&tz=Europe%2FBerlin&units=dwd";
-
-    let weatherTimer = null;
-    let weatherRequestId = 0;
-
-    const loadWeather = async () => {
-        const requestId = ++weatherRequestId;
-        try {
-            const response = await fetch(WEATHER_URL, { referrerPolicy: "no-referrer" });
-            if (!response.ok) throw new Error(response.status);
-            const { weather } = await response.json();
-            if (requestId !== weatherRequestId || !weatherTimer) return;
-
-            const parts = [`HH ${Math.round(weather.temperature)} °C`];
-            if (WEATHER_LABELS[weather.icon]) parts.push(WEATHER_LABELS[weather.icon]);
-            if (weather.wind_speed_10 != null) parts.push(`Wind ${Math.round(weather.wind_speed_10)} km/h`);
-            if (weather.relative_humidity != null) parts.push(`${Math.round(weather.relative_humidity)} %`);
-
-            weatherEl.textContent = parts.join(" · ");
-            weatherEl.title = "Wetter Hamburg: Temperatur, Wetterlage, Wind, Luftfeuchtigkeit. Quelle: Deutscher Wetterdienst (DWD) über Bright Sky";
-        } catch (err) {
-            if (requestId === weatherRequestId && weatherTimer) {
-                weatherEl.textContent = "Wetter derzeit nicht verfügbar";
-            }
-        }
-    };
-
-    const startWeather = () => {
-        if (weatherTimer) return;
-        weatherEl.textContent = "Wetter wird geladen …";
-        weatherTimer = setInterval(loadWeather, 15 * 60 * 1000);
-        loadWeather();
-    };
-
-    const stopWeather = () => {
-        clearInterval(weatherTimer);
-        weatherTimer = null;
-        weatherRequestId++;
-        weatherEl.removeAttribute("title");
-        showOptIn(weatherEl, "weather", "Wetter anzeigen");
-    };
-
-    if (weatherEl && datetimeEl && weekEl && window.NicelandConsent) {
-        let consentState = { weather: false, datetime: false };
-
-        // Nur auf größeren Bildschirmen und nur mit Einwilligung: sonst keine Abrufe und keine Uhr
+        // Nur auf größeren Bildschirmen und nur mit Einwilligung: sonst läuft keine Uhr
         const applyFooter = () => {
-            const show = !mobileQuery.matches;
-            if (show && consentState.weather) startWeather(); else stopWeather();
-            if (show && consentState.datetime) startClock(); else stopClock();
+            if (!mobileQuery.matches && consentState.datetime) startClock(); else stopClock();
         };
 
         window.NicelandConsent.subscribe((consent) => {

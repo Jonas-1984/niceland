@@ -3,11 +3,11 @@
  *
  * - Gespeichert wird ausschließlich die Auswahl des Besuchers im localStorage
  *   (Schlüssel "niceland-consent"). Das ist technisch notwendig und setzt kein Tracking.
- * - Externe Inhalte (Google Maps, Wetterdaten) werden erst NACH Einwilligung geladen.
+ * - Externe Inhalte (Google Maps) werden erst NACH Einwilligung geladen.
  * - "Datum und Uhrzeit" wird lokal im Browser berechnet, ist aber als Option wählbar.
  *
- * API:  NicelandConsent.subscribe(fn)  -> fn({maps, weather, datetime}) sofort und bei jeder Änderung
- *       NicelandConsent.allow("weather") -> einzelne Funktion aktivieren
+ * API:  NicelandConsent.subscribe(fn)  -> fn({maps, datetime}) sofort und bei jeder Änderung
+ *       NicelandConsent.allow("maps")    -> einzelne Funktion aktivieren
  *       NicelandConsent.open()          -> Einstellungsdialog öffnen
  */
 (function () {
@@ -25,19 +25,14 @@
             desc: "Zeigt eine Karte von Hamburg. Beim Laden werden Daten (u. a. Ihre IP-Adresse) an Google übertragen."
         },
         {
-            key: "weather",
-            label: "Wetterverhältnisse",
-            desc: "Zeigt das aktuelle Wetter in Hamburg in der Fußleiste. Beim Abruf wird Ihre IP-Adresse an Bright Sky übertragen (Wetterdaten des Deutschen Wetterdienstes)."
-        },
-        {
             key: "datetime",
             label: "Datum und Uhrzeit",
             desc: "Zeigt Datum, Uhrzeit, Wochentag und Kalenderwoche in der Fußleiste. Die Berechnung erfolgt lokal in Ihrem Browser, es werden keine Daten übertragen."
         }
     ];
 
-    // Wetter, Datum/Uhrzeit und Wochentag/KW erscheinen nur auf größeren Bildschirmen
-    var SMALL_ONLY_HIDDEN = { weather: true, datetime: true };
+    // Datum/Uhrzeit und Wochentag/KW erscheinen nur auf größeren Bildschirmen
+    var SMALL_ONLY_HIDDEN = { datetime: true };
 
     function isSmallScreen() {
         return window.matchMedia("(max-width: 768px)").matches;
@@ -79,7 +74,6 @@
     function snapshot() {
         return {
             maps: !!(state && state.maps),
-            weather: !!(state && state.weather),
             datetime: !!(state && state.datetime)
         };
     }
@@ -94,7 +88,6 @@
             version: VERSION,
             timestamp: new Date().toISOString(),
             maps: !!choices.maps,
-            weather: !!choices.weather,
             datetime: !!choices.datetime
         };
         writeStored(state);
@@ -246,7 +239,7 @@
                 save(all);
                 break;
             case "necessary":
-                save({ maps: false, weather: false, datetime: false });
+                save({ maps: false, datetime: false });
                 break;
             case "save":
                 save(collectModalChoices());

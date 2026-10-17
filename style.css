@@ -921,6 +921,69 @@
     background-color: #ff0000;
 }
 
+/* Animierter Schriftzug "Niceland Hamburg" in der Fußleiste (Strich-Animation, Schleife alle 8 Sekunden) */
+.footer-brand {
+    gap: 14px;
+}
+
+.footer-brand .brand-word {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.footer-brand svg {
+    height: 22px;
+    width: auto;
+    overflow: visible;
+}
+
+.footer-brand path {
+    fill: none;
+    stroke: #FF6700;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: dashArray 8s ease-in-out infinite,
+        dashOffset 8s linear infinite;
+}
+
+/* "Niceland" in dem Blau der Linie auf der Seite "Leistungen" */
+.footer-brand .brand-word:first-child path {
+    stroke: rgb(90, 170, 255);
+}
+
+@keyframes dashArray {
+    0% {
+        stroke-dasharray: 0 1 359 0;
+    }
+
+    50% {
+        stroke-dasharray: 0 359 1 0;
+    }
+
+    100% {
+        stroke-dasharray: 359 1 0 0;
+    }
+}
+
+@keyframes dashOffset {
+    0% {
+        stroke-dashoffset: 365;
+    }
+
+    100% {
+        stroke-dashoffset: 5;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .footer-brand path {
+        animation: none;
+        stroke-dasharray: none;
+    }
+}
+
 /* ===== Mobile-Version ===== */
 @media (max-width: 768px) {
     :root {
@@ -1281,7 +1344,7 @@
         font-size: 10px;
     }
 
-    /* Fußleiste: kompakt, ohne Wetter, Datum/Uhrzeit und Wochentag/KW */
+    /* Fußleiste: kompakt, ohne Schriftzug, Datum/Uhrzeit und Wochentag/KW */
     .social-links {
         position: static;
         transform: none;
@@ -1291,7 +1354,7 @@
         border-radius: var(--border-radius);
     }
 
-    #footer-weather,
+    #footer-brand,
     #footer-datetime,
     #footer-week {
         display: none;
