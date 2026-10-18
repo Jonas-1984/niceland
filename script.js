@@ -43,6 +43,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Desktop: Hilfetext der Menüleiste (senkrecht unter den Symbolen)
+    if (nav) {
+        const showTip = (item) => {
+            nav.dataset.tip = item.getAttribute("data-tip") || "";
+            nav.classList.add("show-tip");
+        };
+        const hideTip = () => nav.classList.remove("show-tip");
+        navItems.forEach((item) => {
+            item.addEventListener("mouseenter", () => showTip(item));
+            item.addEventListener("focus", () => showTip(item));
+            item.addEventListener("mouseleave", hideTip);
+            item.addEventListener("blur", hideTip);
+        });
+    }
+
     // Menü schließen: Tippen außerhalb, Escape oder Wechsel zur Desktop-Ansicht
     document.addEventListener("click", (e) => {
         if (nav && nav.classList.contains("open") && !nav.contains(e.target)) setNavOpen(false);
