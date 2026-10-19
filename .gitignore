@@ -11,3 +11,6 @@ desktop.ini
 _tmp*.html
 *.log
 .env
+
+# Google-Schlüssel (nur per FTP auf den Server)
+google-config.js

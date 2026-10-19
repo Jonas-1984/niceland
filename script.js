@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const showPage = (targetId) => {
         document.body.dataset.page = targetId;
         // Aktive Klasse nur beim passenden Nav-Item setzen
-        navItems.forEach((nav) => nav.classList.toggle("active", nav.getAttribute("data-target") === targetId));
+        navItems.forEach((nav) => nav.classList.toggle("active", nav.getAttribute("data-target") === targetId && !nav.hasAttribute("data-scroll")));
 
         // Passende Seite anzeigen, alle anderen ausblenden
         pages.forEach((page) => {
@@ -40,6 +40,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
             showPage(item.getAttribute("data-target"));
             setNavOpen(false);
+
+            // Symbol "Bewertungen": zur Seite Kontakt springen und das Bewertungskästchen zeigen
+            const scrollId = item.getAttribute("data-scroll");
+            if (scrollId) {
+                setTimeout(() => {
+                    const target = document.getElementById(scrollId);
+                    if (!target) return;
+                    target.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                    target.classList.add("is-highlighted");
+                    setTimeout(() => target.classList.remove("is-highlighted"), 1800);
+                }, 80);
+            }
         });
     });
 

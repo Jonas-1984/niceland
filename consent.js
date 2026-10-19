@@ -21,8 +21,8 @@
     var CATEGORIES = [
         {
             key: "maps",
-            label: "Google Maps",
-            desc: "Zeigt eine Karte von Hamburg. Beim Laden werden Daten (u. a. Ihre IP-Adresse) an Google übertragen."
+            label: "Google Maps und Bewertungen",
+            desc: "Zeigt eine Google-Karte und die Google-Bewertungen unseres Betriebs. Beim Laden werden Daten (u. a. Ihre IP-Adresse) an Google übertragen."
         },
         {
             key: "datetime",
